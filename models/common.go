@@ -14,6 +14,6 @@ type NavBar struct {
 }
 type NavBarItem struct {
 	Button string `bson:"button"`
-	Accordion
+	//Accordion
 }
 
