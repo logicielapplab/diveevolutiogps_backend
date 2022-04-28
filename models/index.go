@@ -7,7 +7,9 @@ type Index struct {
 	Footer	`bson:"footer"`
 }
 type Header struct {
-
+	NavBar `bson:"navBar"`
+	Title string 	`bson:"title"`
+	Button	string `bson:"button"`
 }
 type Body struct {
 	Section1	`bson:"section1"`

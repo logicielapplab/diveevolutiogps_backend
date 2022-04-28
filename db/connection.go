@@ -40,8 +40,41 @@ func GetDocument(collection *mongo.Collection)  bson.M{
 	return result
 }
 func UpdateDocumment(collection *mongo.Collection){
+	navBar := models.NavBar{
+		NavBarItems: [] models.NavBarItem {
+			models.NavBarItem{
+				Title: "Inicio",
+				Accordion: []string{},
+			},
+			models.NavBarItem{
+				Title: "Nosotros",
+				Accordion: []string{},
+			},
+			models.NavBarItem{
+				Title: "Tours",
+				Accordion: []string{
+					"San Cristóbal",
+					"Santa Cruz",
+					"Isabela",
+				},
+			},
+			models.NavBarItem{
+				Title: "Cursos de Buceo",
+				Accordion: []string{},
+			},
+			models.NavBarItem{
+				Title: "Contacto",
+				Accordion: []string{},
+			},
+		},
+	}
 	data := models.Index{
 		Id: "4164da5e-cacd-4827-8891-26945019a5be",
+		Header: models.Header{
+			NavBar: navBar,
+			Title: "Lorem Ipsum is simply dummy text",
+			Button: "Lorem Ipsum",
+		},
 		Body: models.Body{
 			Section1: models.Section1{
 				Calidad: []string{"Lorem Ipsum","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"},
@@ -65,6 +98,15 @@ func UpdateDocumment(collection *mongo.Collection){
 						Button: "Lorem Ipsum",
 					},
 				},
+			},
+		},
+		Footer: models.Footer{
+			NavBar: navBar,
+			Phone: "+593982291894",
+			SocialMedia: models.SocialMedia{
+				Facebook: "https://www.facebook.com/Logiciel-AppLab-115115559920070",
+				Instagram: "https://www.instagram.com/logicielapplab/",
+				Twitter: "",
 			},
 		},
 	}
