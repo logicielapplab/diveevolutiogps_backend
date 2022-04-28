@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"diveEvolution/models"
+	uuid "github.com/satori/go.uuid"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -24,8 +25,8 @@ func ConnectDB () *mongo.Client{
 	}
 	return client
 }
-func GetDocument(collection *mongo.Collection)  bson.M{
-	cur, err := collection.Find(context.TODO(), bson.D{{"_id", "4164da5e-cacd-4827-8891-26945019a5be"}})
+func GetDocument(collection *mongo.Collection,id string)  bson.M{
+	cur, err := collection.Find(context.TODO(), bson.D{{"_id", id}})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -35,11 +36,10 @@ func GetDocument(collection *mongo.Collection)  bson.M{
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Println("Result: ", result)
 	}
 	return result
 }
-func UpdateDocumment(collection *mongo.Collection){
+func UpdateDocumment(collections []*mongo.Collection){
 	navBar := models.NavBar{
 		NavBarItems: [] models.NavBarItem {
 			models.NavBarItem{
@@ -68,13 +68,24 @@ func UpdateDocumment(collection *mongo.Collection){
 			},
 		},
 	}
+	header := models.Header{
+		Id: uuid.NewV4().String(),
+		NavBar: navBar,
+		Title: "Lorem Ipsum is simply dummy text",
+		Button: "Lorem Ipsum",
+	}
+	footer := models.Footer{
+		Id: uuid.NewV4().String(),
+		NavBar: navBar,
+		Phone: "+593982291894",
+		SocialMedia: models.SocialMedia{
+			Facebook: "https://www.facebook.com/Logiciel-AppLab-115115559920070",
+			Instagram: "https://www.instagram.com/logicielapplab/",
+			Twitter: "",
+		},
+	}
 	data := models.Index{
 		Id: "4164da5e-cacd-4827-8891-26945019a5be",
-		Header: models.Header{
-			NavBar: navBar,
-			Title: "Lorem Ipsum is simply dummy text",
-			Button: "Lorem Ipsum",
-		},
 		Body: models.Body{
 			Section1: models.Section1{
 				Calidad: []string{"Lorem Ipsum","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"},
@@ -100,15 +111,8 @@ func UpdateDocumment(collection *mongo.Collection){
 				},
 			},
 		},
-		Footer: models.Footer{
-			NavBar: navBar,
-			Phone: "+593982291894",
-			SocialMedia: models.SocialMedia{
-				Facebook: "https://www.facebook.com/Logiciel-AppLab-115115559920070",
-				Instagram: "https://www.instagram.com/logicielapplab/",
-				Twitter: "",
-			},
-		},
 	}
-	collection.UpdateOne(context.TODO(), bson.D{{"_id", "4164da5e-cacd-4827-8891-26945019a5be"}}, bson.D{{"$set", data}})
+	collections[0].UpdateOne(context.TODO(), bson.D{{"_id", "4164da5e-cacd-4827-8891-26945019a5be"}}, bson.D{{"$set", data}})
+	collections[1].UpdateOne(context.TODO(), bson.D{{"_id", "76ff0c4a-ca1c-4d62-9304-6e3a71565ff4"}}, bson.D{{"$set",header}})
+	collections[2].UpdateOne(context.TODO(), bson.D{{"_id", "f93746d6-8b27-481f-ad1f-e888f7ef6d0f"}},bson.D{{"$set",footer}})
 }

@@ -1,6 +1,13 @@
 package models
 
+type Header struct {
+	Id string `bson:"_id"`
+	NavBar `bson:"navBar"`
+	Title string 	`bson:"title"`
+	Button	string `bson:"button"`
+}
 type Footer struct {
+	Id string `bson:"_id"`
 	NavBar `bson:"navBar"`
 	Phone string `bson:"phone"`
 	SocialMedia `bson:"social_media"`

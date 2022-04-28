@@ -3,23 +3,22 @@ package routes
 import (
 	"diveEvolution/db"
 	"encoding/json"
-	"fmt"
 	"go.mongodb.org/mongo-driver/mongo"
 	"net/http"
 )
-var IndexCollection *mongo.Collection
+var IndexBody *mongo.Collection
+
 func init()  {
 	client := db.ConnectDB()
-	IndexCollection = client.Database("DiveEvolution").Collection("Index")
+	IndexBody = client.Database("DiveEvolution").Collection("Index")
 }
 func IndexHandler (w http.ResponseWriter, r *http.Request){
-	data := db.GetDocument(IndexCollection)
+	data := db.GetDocument(IndexBody,"4164da5e-cacd-4827-8891-26945019a5be")
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	d, _ := json.Marshal(data)
 	w.Write(d)
-	fmt.Println("EJECUTADO")
 }
 func UpdateIndexHandler (w http.ResponseWriter, r *http.Request)  {
-	db.UpdateDocumment(IndexCollection)
+	db.UpdateDocumment([]*mongo.Collection{IndexBody, Header, Footer})
 }
