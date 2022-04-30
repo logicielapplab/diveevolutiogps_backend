@@ -35,7 +35,7 @@ func RunApp(){
 	http.ListenAndServe(":"+port, handlers.CORS(methods, origin)(router))
 }
 func Home (w http.ResponseWriter, r *http.Request){
-	w.Write([]byte("https://dive-evolution.herokuapp.com/api/getIndex\nhttps://dive-evolution.herokuapp.com/api/getHeader\nhttps://dive-evolution.herokuapp.com/api/getFooter"))
+	w.Write([]byte("/api/getIndex\n/api/getHeader\n/api/getFooter\n/api/getIndexImg\n/api/getHeaderImg\n/api/getFooterImg"))
 }
 func writeHeader(w http.ResponseWriter, r *http.Request){
 	data := models.HeaderImg{
