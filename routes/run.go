@@ -65,6 +65,7 @@ func writeFooter(w http.ResponseWriter, r *http.Request){
 		Id: uuid.NewV4().String(),
 		Logo:"https://via.placeholder.com/150/0000FF/808080",
 		Background: "https://via.placeholder.com/2000x800/000000/808080",
+		WhatsApp: "https://res.cloudinary.com/logicielapplab/image/upload/v1651350046/DiveEvolution/Footer/3225179_app_logo_media_popular_social_icon_juvvzd.svg",
 		SocialMediaIcons: models.SocialMediaIcons{
 			Facebook: "https://res.cloudinary.com/logicielapplab/image/upload/v1651296519/DiveEvolution/Footer/3225194_app_facebook_logo_media_popular_icon_wrmery.svg",
 			Instagram: "https://res.cloudinary.com/logicielapplab/image/upload/v1651296520/DiveEvolution/Footer/3225191_app_instagram_logo_media_popular_icon_hokrzm.svg",

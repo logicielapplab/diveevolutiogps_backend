@@ -38,7 +38,7 @@ func HeaderImgHandler (w http.ResponseWriter, r *http.Request){
 }
 func FooterImgHandler (w http.ResponseWriter, r *http.Request){
 	FooterImg = Client.Database("DiveEvolution").Collection("FooterImg")
-	data := db.GetDocument(FooterImg,"52f6cbe4-652e-4e33-a3b7-2aeb5bdae074")
+	data := db.GetDocument(FooterImg,"9756d287-94ae-47de-aacc-c454b9ff0ce8")
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	d, _ := json.Marshal(data)

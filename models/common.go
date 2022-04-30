@@ -36,6 +36,7 @@ type FooterImg struct {
 	Id string `bson:"_id"`
 	Logo string `bson:"logo"`
 	Background string `bson:"background"`
+	WhatsApp string 	`bson:"whatsapp"`
 	SocialMediaIcons `bson:"social_media_icons"`
 }
 type LangItem struct {
