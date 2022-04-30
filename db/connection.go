@@ -10,7 +10,7 @@ import (
 	"log"
 )
 
-var client *mongo.Client
+
 var IndexCollection *mongo.Collection
 
 func ConnectDB () *mongo.Client{
@@ -19,6 +19,7 @@ func ConnectDB () *mongo.Client{
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	err = client.Ping(context.TODO(), nil)
 	if err != nil {
 		log.Fatal(err)

@@ -6,19 +6,25 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"net/http"
 )
-var IndexBody *mongo.Collection
+var Index *mongo.Collection
+var IndexImg *mongo.Collection
 
-func init()  {
-	client := db.ConnectDB()
-	IndexBody = client.Database("DiveEvolution").Collection("Index")
-}
 func IndexHandler (w http.ResponseWriter, r *http.Request){
-	data := db.GetDocument(IndexBody,"4164da5e-cacd-4827-8891-26945019a5be")
+	Index = Client.Database("DiveEvolution").Collection("Index")
+	data := db.GetDocument(Index,"4164da5e-cacd-4827-8891-26945019a5be")
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	d, _ := json.Marshal(data)
+	w.Write(d)
+}
+func IndexImgHandler (w http.ResponseWriter, r *http.Request){
+	IndexImg = Client.Database("DiveEvolution").Collection("IndexImg")
+	data := db.GetDocument(IndexImg,"15388a1e-faaf-4fcb-9244-1ffa2813be59")
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	d, _ := json.Marshal(data)
 	w.Write(d)
 }
 func UpdateIndexHandler (w http.ResponseWriter, r *http.Request)  {
-	db.UpdateDocumment([]*mongo.Collection{IndexBody, Header, Footer})
+	db.UpdateDocumment([]*mongo.Collection{Index, Header, Footer})
 }
