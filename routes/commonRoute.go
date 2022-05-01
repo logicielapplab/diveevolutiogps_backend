@@ -2,7 +2,9 @@ package routes
 
 import (
 	"diveEvolution/db"
+	"diveEvolution/utils"
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/mongo"
 	"net/http"
 )
@@ -13,16 +15,20 @@ var HeaderImg *mongo.Collection
 var FooterImg *mongo.Collection
 
 func HeaderHandler (w http.ResponseWriter, r *http.Request){
+	params := mux.Vars(r)
+	language := params["lang"]
 	Header = Client.Database("DiveEvolution").Collection("Header")
-	data := db.GetDocument(Header,"76ff0c4a-ca1c-4d62-9304-6e3a71565ff4")
+	data := db.GetDocument(Header,utils.GetLang(language,"header"))
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	d, _ := json.Marshal(data)
 	w.Write(d)
 }
 func FooterHandler (w http.ResponseWriter, r *http.Request){
+	params := mux.Vars(r)
+	language := params["lang"]
 	Footer = Client.Database("DiveEvolution").Collection("Footer")
-	data := db.GetDocument(Footer,"f93746d6-8b27-481f-ad1f-e888f7ef6d0f")
+	data := db.GetDocument(Footer,utils.GetLang(language,"footer"))
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	d, _ := json.Marshal(data)

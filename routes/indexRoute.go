@@ -2,7 +2,9 @@ package routes
 
 import (
 	"diveEvolution/db"
+	"diveEvolution/utils"
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/mongo"
 	"net/http"
 )
@@ -10,8 +12,10 @@ var Index *mongo.Collection
 var IndexImg *mongo.Collection
 
 func IndexHandler (w http.ResponseWriter, r *http.Request){
+	params := mux.Vars(r)
+	language := params["lang"]
 	Index = Client.Database("DiveEvolution").Collection("Index")
-	data := db.GetDocument(Index,"4164da5e-cacd-4827-8891-26945019a5be")
+	data := db.GetDocument(Index,utils.GetLang(language,"index"))
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	d, _ := json.Marshal(data)

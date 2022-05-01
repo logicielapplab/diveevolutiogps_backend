@@ -19,9 +19,9 @@ func init() {
 func RunApp(){
 	router := mux.NewRouter()
 	router.HandleFunc("/", Home).Methods("GET")
-	router.HandleFunc("/api/getIndex", IndexHandler).Methods("GET")
-	router.HandleFunc("/api/getHeader", HeaderHandler).Methods("GET")
-	router.HandleFunc("/api/getFooter", FooterHandler).Methods("GET")
+	router.HandleFunc("/api/getIndex/{lang}", IndexHandler).Methods("GET")
+	router.HandleFunc("/api/getHeader/{lang}", HeaderHandler).Methods("GET")
+	router.HandleFunc("/api/getFooter/{lang}", FooterHandler).Methods("GET")
 	router.HandleFunc("/api/getIndexImg", IndexImgHandler).Methods("GET")
 	router.HandleFunc("/api/getHeaderImg", HeaderImgHandler).Methods("GET")
 	router.HandleFunc("/api/getFooterImg", FooterImgHandler).Methods("GET")
@@ -35,7 +35,7 @@ func RunApp(){
 	http.ListenAndServe(":"+port, handlers.CORS(methods, origin)(router))
 }
 func Home (w http.ResponseWriter, r *http.Request){
-	w.Write([]byte("/api/getIndex\n/api/getHeader\n/api/getFooter\n/api/getIndexImg\n/api/getHeaderImg\n/api/getFooterImg"))
+	w.Write([]byte("/api/getIndex/es\n/api/getHeader/es\n/api/getFooter/es\n/api/getIndexImg\n/api/getHeaderImg\n/api/getFooterImg"))
 }
 func writeHeader(w http.ResponseWriter, r *http.Request){
 	data := models.HeaderImg{

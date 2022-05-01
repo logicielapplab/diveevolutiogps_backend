@@ -11,8 +11,6 @@ import (
 )
 
 
-var IndexCollection *mongo.Collection
-
 func ConnectDB () *mongo.Client{
 	opt := options.Client().ApplyURI("mongodb+srv://doadmin:Z3d87ni4E91g05aX@logiciel-applab-dab57134.mongo.ondigitalocean.com/admin?authSource=admin&replicaSet=logiciel-applab&tls=true&tlsCAFile=db/ca-certificate.crt")
 	client, err := mongo.Connect(context.TODO(), opt)
@@ -86,7 +84,7 @@ func UpdateDocumment(collections []*mongo.Collection){
 		},
 	}
 	data := models.Index{
-		Id: "4164da5e-cacd-4827-8891-26945019a5be",
+		Id: uuid.NewV4().String(),
 		Body: models.Body{
 			Section1: models.Section1{
 				Calidad: []string{"Lorem Ipsum","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"},
@@ -113,7 +111,8 @@ func UpdateDocumment(collections []*mongo.Collection){
 			},
 		},
 	}
-	collections[0].UpdateOne(context.TODO(), bson.D{{"_id", "4164da5e-cacd-4827-8891-26945019a5be"}}, bson.D{{"$set", data}})
-	collections[1].UpdateOne(context.TODO(), bson.D{{"_id", "76ff0c4a-ca1c-4d62-9304-6e3a71565ff4"}}, bson.D{{"$set",header}})
-	collections[2].UpdateOne(context.TODO(), bson.D{{"_id", "f93746d6-8b27-481f-ad1f-e888f7ef6d0f"}},bson.D{{"$set",footer}})
+	collections[0].InsertOne(context.TODO(), data)
+	collections[1].InsertOne(context.TODO(), header)
+	collections[2].InsertOne(context.TODO(), footer)
+
 }
