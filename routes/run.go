@@ -9,6 +9,7 @@ import (
 	uuid "github.com/satori/go.uuid"
 	"go.mongodb.org/mongo-driver/mongo"
 	"net/http"
+	"os"
 )
 
 var Client *mongo.Client
@@ -34,8 +35,8 @@ func RunApp(){
 	router.HandleFunc("/api/updateContactImg", writeContactImg).Methods("GET")
 	methods := handlers.AllowedMethods([]string{"GET", "POST"})
 	origin := handlers.AllowedOrigins([]string{"*"})
-	//port := os.Getenv("PORT")
-	http.ListenAndServe(":8080", handlers.CORS(methods, origin)(router))
+	port := os.Getenv("PORT")
+	http.ListenAndServe(":"+port, handlers.CORS(methods, origin)(router))
 }
 func Home (w http.ResponseWriter, r *http.Request){
 	w.Write([]byte("/api/getIndex/es\n/api/getHeader/es\n/api/getFooter/es\n/api/getContact/es\n/api/getIndexImg\n/api/getHeaderImg\n/api/getFooterImg"))
