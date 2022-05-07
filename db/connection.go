@@ -67,12 +67,12 @@ func UpdateDocumment(collections []*mongo.Collection){
 			},
 		},
 	}
-	header := models.Header{
-		Id: uuid.NewV4().String(),
-		NavBar: navBar,
-		Title: "Lorem Ipsum is simply dummy text",
-		Button: "Lorem Ipsum",
-	}
+	//header := models.Header{
+	//	Id: uuid.NewV4().String(),
+	//	NavBar: navBar,
+	//	Title: "Lorem Ipsum is simply dummy text",
+	//	Button: "Lorem Ipsum",
+	//}
 	footer := models.Footer{
 		Id: uuid.NewV4().String(),
 		NavBar: navBar,
@@ -112,7 +112,6 @@ func UpdateDocumment(collections []*mongo.Collection){
 		},
 	}
 	collections[0].InsertOne(context.TODO(), data)
-	collections[1].InsertOne(context.TODO(), header)
-	collections[2].InsertOne(context.TODO(), footer)
+	collections[1].InsertOne(context.TODO(), footer)
 
 }

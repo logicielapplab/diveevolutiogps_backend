@@ -12,7 +12,6 @@ func GetLang(lang, routeName string)string{
 		}else {
 			return "4164da5e-cacd-4827-8891-26945019a5be"
 		}
-		
 	}else if routeName == "header"{
 		if lang == "es"{
 			return "76ff0c4a-ca1c-4d62-9304-6e3a71565ff4"
@@ -32,6 +31,16 @@ func GetLang(lang, routeName string)string{
 			return "f21aa619-b746-4b50-8381-de8956eba4df"
 		}else {
 			return "f93746d6-8b27-481f-ad1f-e888f7ef6d0f"
+		}
+	}else if routeName == "contact"{
+		if lang == "es"{
+			return "a310cb1b-21ca-42f8-936c-4c0fe117a2f0"
+		}else if lang == "en"{
+			return "5c240292-e280-4f49-8f6c-342295160271"
+		}else if lang == "fr"{
+			return "2c00ab61-d7d7-4ef9-b7d9-da0898ee0a6e"
+		}else {
+			return "76ff0c4a-ca1c-4d62-9304-6e3a71565ff4"
 		}
 	}else {
 		return ""

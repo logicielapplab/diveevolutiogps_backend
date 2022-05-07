@@ -30,5 +30,5 @@ func IndexImgHandler (w http.ResponseWriter, r *http.Request){
 	w.Write(d)
 }
 func UpdateIndexHandler (w http.ResponseWriter, r *http.Request)  {
-	db.UpdateDocumment([]*mongo.Collection{Index, Header, Footer})
+	db.UpdateDocumment([]*mongo.Collection{Index, Footer})
 }
